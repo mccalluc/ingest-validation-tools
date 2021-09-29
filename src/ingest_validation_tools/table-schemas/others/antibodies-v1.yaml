@@ -24,7 +24,7 @@ fields:
     description: 'The uniprot_accession_number is a unique identifier for proteins in the UniProt database (https://www.uniprot.org).'
     custom_constraints:
       url:
-        prefix: 'https://www.uniprot.org/uniprot/'
+        prefix: 'http://purl.uniprot.org/uniprot/'
   - name: lot_number
     description: 'The lot# is specific to the vendor. (eg: Abcam lot# GR3238979-1)'
   - name: dilution
