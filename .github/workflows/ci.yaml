@@ -20,11 +20,11 @@ jobs:
         python-version: '3.6' # The Red Hat version used by IEC doesn't support anything more recent. :(
         architecture: 'x64'
 
-    - name: Install python main dependencies
-      run: pip install -r requirements.txt
+    # - name: Install python main dependencies
+    #   run: pip install -r requirements.txt
 
-    - name: Install python dev dependencies
-      run: pip install -r requirements-dev.txt
+    # - name: Install python dev dependencies
+    #   run: pip install -r requirements-dev.txt
 
     - name: Install everything ... fix SSL?
       run: pip install -r requirements-freeze.txt
