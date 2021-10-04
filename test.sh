@@ -7,6 +7,8 @@ die() { set +v; echo "$*" 1>&2 ; sleep 1; exit 1; }
 
 CONTINUE_FROM="$1"
 
+tests/test-tsv-examples.sh
+
 if [[ -z $CONTINUE_FROM ]]; then
   start flake8
   flake8 src || die 'Try: autopep8 --in-place --aggressive -r .'
