@@ -7,6 +7,9 @@ die() { set +v; echo "$*" 1>&2 ; sleep 1; exit 1; }
 
 CONTINUE_FROM="$1"
 
+python -c 'import requests; print(requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS)'
+python -c 'import urllib3; print(urllib3.__version__)'
+pip freeze | grep 'requests\|urllib3'
 tests/test-tsv-examples.sh
 
 if [[ -z $CONTINUE_FROM ]]; then
