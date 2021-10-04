@@ -40,6 +40,8 @@ class _CheckFactory():
         if url not in url_status_cache:
             print(f'Fetching un-cached url: {url}', file=stderr)
             try:
+                # TODO: Remove when bug diagnosed
+                import sys; requests.settings.verbose = sys.stdout
                 response = requests.get(url)
                 url_status_cache[url] = response.status_code
             except Exception as e:
