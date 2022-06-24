@@ -23,7 +23,8 @@ def make_checks(schema) -> List[Check]:
         factory.make_sequence_limit_check(),
         factory.make_units_check(),
         factory.make_forbid_na_check(),
-        factory.make_at_least_one_check(),
+        # TODO:
+        # factory.make_at_least_one_check(),
     ]
 
 
@@ -155,6 +156,7 @@ class _CheckFactory():
         def at_least_one_check(row):
             for k, v in row.items():
                 if (k in constrained_fields and v):
+                    # TODO: above causes "NoneType' object is not iterable"
                     constrained_fields_with_data.add(k)
             # TODO:
             # if last row, and constrained_fields != constrained_fields_with_data
