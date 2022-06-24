@@ -13,7 +13,9 @@ def validate(schema):
         checks=checks
     )
     assert not report['errors']
-    return report
+    tasks = report['tasks']
+    assert len(tasks) == 1
+    return tasks[0]['errors']
 
 
 def test_expected_error():
@@ -22,8 +24,6 @@ def test_expected_error():
             {'name': 'this_name_will_not_match'}
         ]
     }
-    report = validate(schema)
-    tasks = report['tasks']
-    assert len(tasks) == 1
-    assert tasks[0]['errors'][0]['description'] == \
+    errors = validate(schema)
+    assert errors[0]['description'] == \
         'One of the data source header does not match the field name defined in the schema.'
