@@ -7,20 +7,6 @@ die() { set +v; echo "$*" 1>&2 ; sleep 1; exit 1; }
 
 CONTINUE_FROM="$1"
 
-if [[ -z $CONTINUE_FROM ]]; then
-  start flake8
-  flake8 src || die 'Try: autopep8 --in-place --aggressive -r .'
-  end flake8
-
-  start mypy
-  mypy
-  end mypy
-
-  start pytest
-  pytest --doctest-modules
-  end pytest
-fi
-
 for TEST in tests/test-*; do
   if [[ -z $CONTINUE_FROM ]] || [[ $CONTINUE_FROM = $TEST ]]; then
     CONTINUE_FROM=''

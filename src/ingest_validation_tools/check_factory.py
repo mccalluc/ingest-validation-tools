@@ -22,7 +22,8 @@ def make_checks(schema) -> List[Check]:
         factory.make_url_check(),
         factory.make_sequence_limit_check(),
         factory.make_units_check(),
-        factory.make_forbid_na_check()
+        factory.make_forbid_na_check(),
+        factory.make_at_least_one_check(),
     ]
 
 
@@ -145,3 +146,19 @@ class _CheckFactory():
                     note = template.substitute()
                     yield frictionless.errors.CellError.from_row(row, note=note, field_name=k)
         return forbid_na_check
+
+    def make_at_least_one_check(self, template=Template(
+            'At least one row in this column must be filled')) -> Check:
+        constrained_fields = set(self._get_constrained_fields('at_least_one'))
+        constrained_fields_with_data = set()
+
+        def at_least_one_check(row):
+            for k, v in row.items():
+                if (k in constrained_fields and v):
+                    constrained_fields_with_data.add(k)
+            # TODO:
+            # if last row, and constrained_fields != constrained_fields_with_data
+            #    error!
+            # note = template.substitute()
+            # yield frictionless.errors.CellError.from_row(row, note=note, field_name=k)
+        return at_least_one_check
